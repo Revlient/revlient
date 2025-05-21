@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"
+        integrity="sha512-MqL4+Io386IOPMKKyplKII0pVW5e+kb+PI/I3N87G3fHIfrgNNsRpzIXEi+0MQC0sR9xZNqZqCYVcC61fL5+Vg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <title>Nuke Team</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+        
+
+        
+
+        :root {
+            --primary-color: #0fb4e9;
+            --secondary-color: #081b29;
+            --accent-color: #4a90e2;
+            --dark-color: #0c0f27;
+            --text-color: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --btn-primary: rgba(0, 0, 0, 0.25);
+            --btn-secondary: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            font-family: "Poppins", sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+            background-color: var(--dark-color);
+        }
+
+       
+       
+        /* Swiper container styles */
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+            z-index: 2;
+        }
+
+        /* Main image styling */
+        .swiper-slide img.main-img {
+            position: absolute;
+            bottom: 0;
+            left: 0px;
+            /* Adjusted from -2px to -10px for more left shift */
+            right: 5%;
+            height: 85%;
+            object-fit: contain;
+            z-index: 1;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Title styling */
+        h2 {
+            position: absolute;
+            top: 0;
+            left: 4px;
+            /* Adjusted from 0 to 1px */
+            margin-top: 80px;
+            transform: rotate(90deg) translate(45%, 100%);
+            font-family: "Poppins", sans-serif;
+            font-size: 115px;
+            font-weight: 800;
+            opacity: 0.5;
+            z-index: 2;
+            letter-spacing: 2px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* Info and pricing sections */
+        .info,
+        .pricing {
+            position: absolute;
+            font-size: 14px;
+            z-index: 3;
+            background-color: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info {
+            left: 10%;
+            bottom: 30%;
+            line-height: 1.8;
+            text-align: left;
+            max-width: 250px;
+        }
+
+        .pricing {
+            right: 10%;
+            top: 30%;
+            text-align: left;
+            max-width: 300px;
+        }
+
+        .pricing p,
+        .info p {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .pricing span,
+        .info span {
+            display: block;
+            line-height: 1.5;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .pricing h3 {
+            font-size: 28px;
+            margin: 15px 0;
+            letter-spacing: 1px;
+        }
+
+        /* Button styles */
+        .btn-block {
+            display: flex;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .btn,
+        .light-btn {
+            padding: 12px 24px;
+            font-family: "Poppins", sans-serif;
+            border: none;
+            color: var(--text-color);
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 30px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn {
+            background: var(--btn-primary);
+        }
+
+        .light-btn {
+            background: var(--btn-secondary);
+            flex: 1;
+        }
+
+        .btn:hover,
+        .light-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: rgba(15, 180, 233, 0.5);
+        }
+
+        .light-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Thumbnail navigation */
+        .swiper-thumbs {
+            position: fixed;
+            bottom: 5%;
+            right: 10%;
+            z-index: 10;
+            width: 300px;
+            height: 60px;
+            overflow: hidden;
+            border-radius: 30px;
+            background-color: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 5px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .swiper-thumbs .swiper-slide {
+            height: 50px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 14px;
+            border: 2px solid transparent;
+        }
+
+        .swiper-thumbs .swiper-slide-thumb-active {
+            border-color: var(--text-color);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Scroll indicator */
+        .scroll {
+            position: absolute;
+            z-index: 10;
+            font-size: 12px;
+            bottom: 5%;
+            left: 10%;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: bounce 2s infinite;
+            background-color: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+        /* Social links */
+        .social {
+            position: absolute;
+            z-index: 10;
+            font-size: 18px;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .social a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+            background-color: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social a:hover {
+            transform: translateY(-5px);
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        /* Page indicator */
+        .page-indicator {
+            position: absolute;
+            z-index: 10;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .page-indicator .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
+        }
+
+        .page-indicator .dot.active {
+            background-color: var(--text-color);
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Page indicator dots -->
+    <div class="page-indicator">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <!-- Main swiper -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <!-- Slide 1: Prabha -->
+            <div class="swiper-slide" style="background: linear-gradient(135deg, #ff0000, #fafafa);">
+                <div class="gradient-overlay"></div>
+                <h2>DEVIJIT</h2>
+
+                <div class="pricing">
+                    <p>DEVIJIT</p>
+                    <span style="color: #000000;">Friendly & Fierce</span>
+                    <h3>CEO & HEAD OF SALES</h3>
+                    <div class="btn-block">
+                       
+                    </div>
+                </div>
+                <img src="/de.png" alt="dev" class="main-img">
+            </div>
+
+            <!-- Slide 2: Swetha -->
+            <div class="swiper-slide" style="background: linear-gradient(135deg, #ff0000, #00ffdd);">
+                <div class="gradient-overlay"></div>
+                <h2>SWETHA</h2>
+
+                <div class="pricing">
+                    <p>SWETHA SRINIVASAN</p>
+                    <span>Bold & Contentful</span>
+                    <h3>CONTENT EXPERT</h3>
+                    <div class="btn-block">
+                        <button class="light-btn"><i class="ri-mail-send-line"></i> Contact</button>
+                        <button class="btn"><i class="ri-instagram-line"></i></button>
+                    </div>
+                </div>
+                <img src="/2.png" alt="Swetha" class="main-img">
+            </div>
+
+            <!-- Slide 3: Raghav -->
+            <div class="swiper-slide" style="background: linear-gradient(135deg, #ff0000, #ff00aa);">
+                <div class="gradient-overlay"></div>
+                <h2>RAGHAV</h2>
+
+                <div class="pricing">
+                    <p>RAGHAV KRISHNA</p>
+                    <span>Sleek & Innovative</span>
+                    <h3>WEBSITE DEVELOPER</h3>
+                    <div class="btn-block">
+                        <button class="light-btn"><i class="ri-mail-send-line"></i> Contact</button>
+                        <button class="btn"><i class="ri-instagram-line"></i></button>
+                    </div>
+                </div>
+                <img src="/3.png" alt="Raghav" class="main-img">
+            </div>
+        </div>
+
+        <!-- Thumbnail navigation -->
+        <div class="swiper-thumbs">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">DEVIJIT</div>
+                <div class="swiper-slide">ADITHYAN</div>
+                <div class="swiper-slide">RAGHAV</div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="scroll">Scroll Down <i class="ri-mouse-line"></i></div>
+
+        <!-- Social links -->
+        <div class="social">
+            <a href="#"><i class="ri-instagram-line"></i></a>
+            <a href="#"><i class="ri-linkedin-box-line"></i></a>
+            <a href="#"><i class="ri-twitter-x-line"></i></a>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // DOM elements for page indicator
+        const dots = document.querySelectorAll('.page-indicator .dot');
+
+        // Initialize thumbnail swiper
+        const thumbsSwiper = new Swiper('.swiper-thumbs', {
+            slidesPerView: 3,
+            spaceBetween: 10,
+            watchSlidesProgress: true,
+        });
+
+        // Initialize main swiper
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            spaceBetween: 0,
+            mousewheel: true,
+            speed: 1000,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            direction: 'vertical',
+            thumbs: {
+                swiper: thumbsSwiper
+            },
+            on: {
+                slideChangeTransitionStart: function () {
+                    // Reset opacity to ensure elements are visible
+                    gsap.set('.swiper-slide-active h2, .swiper-slide-active .info, .swiper-slide-active .pricing, .swiper-slide-active .main-img',
+                        { clearProps: "all" });
+
+                    // Animate heading
+                    gsap.fromTo(
+                        '.swiper-slide-active h2',
+                        { x: -200, opacity: 0 },
+                        { x: 0, opacity: 0.5, duration: 1, delay: 0.2, ease: "power3.out" }
+                    );
+
+                    // Animate info section
+                    gsap.fromTo(
+                        '.swiper-slide-active .info',
+                        { x: -50, opacity: 0 },
+                        { x: 0, opacity: 1, duration: 0.8, delay: 0.3, ease: "back.out(1.7)" }
+                    );
+
+                    // Animate pricing section
+                    gsap.fromTo(
+                        '.swiper-slide-active .pricing',
+                        { x: 50, opacity: 0 },
+                        { x: 0, opacity: 1, duration: 0.8, delay: 0.4, ease: "back.out(1.7)" }
+                    );
+
+                    // Animate main image
+                    gsap.fromTo(
+                        '.swiper-slide-active .main-img',
+                        { y: 100, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: "power3.out" }
+                    );
+
+                    // Update page indicator
+                    dots.forEach((dot, index) => {
+                        dot.classList.remove('active');
+                        if (index === swiper.realIndex) {
+                            dot.classList.add('active');
+                        }
+                    });
+                },
+            }
+        });
+
+        // Initial animations
+        gsap.fromTo(
+            'nav',
+            { y: -50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power3.out" }
+        );
+
+        gsap.fromTo(
+            '.page-indicator',
+            { x: -50, opacity: 0 },
+            { x: 0, opacity: 1, duration: 1, delay: 0.4, ease: "power3.out" }
+        );
+
+        gsap.fromTo(
+            '.swiper-slide-active h2',
+            { x: -200, opacity: 0 },
+            { x: 0, opacity: 0.5, duration: 1, delay: 0.5, ease: "power3.out" }
+        );
+
+        gsap.fromTo(
+            '.swiper-slide-active .info',
+            { x: -50, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.8, delay: 0.6, ease: "back.out(1.7)" }
+        );
+
+        gsap.fromTo(
+            '.swiper-slide-active .pricing',
+            { x: 50, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.8, delay: 0.7, ease: "back.out(1.7)" }
+        );
+
+        gsap.fromTo(
+            '.swiper-slide-active .main-img',
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, delay: 0.8, ease: "power3.out" }
+        );
+
+        gsap.fromTo(
+            '.swiper-thumbs',
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, delay: 1, ease: "back.out(1.7)" }
+        );
+
+        gsap.fromTo(
+            '.scroll',
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, delay: 1.1, ease: "back.out(1.7)" }
+        );
+
+        gsap.fromTo(
+            '.social',
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, delay: 1.2, ease: "back.out(1.7)" }
+        );
+    </script>
+</body>
+
+</html>
