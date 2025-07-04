@@ -90,7 +90,6 @@ export default function Hero() {
                   src="/revlogo.png"
                   alt="Revlient"
                   layout="fill"
-             
                 />
               </motion.div>
               
@@ -115,16 +114,28 @@ export default function Hero() {
       {/* Background gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-radial top-1/9 from-gray-900/0 via-gray-900/10 to-black/80 z-0" />
       
-      {/* Globe with responsive positioning - desktop vs mobile */}
-     <motion.div
-        className={`absolute inset-0 flex ${isMobile ? 'items-center justify-center' : 'left-[475px] top-[400px] justify-center'}`}
+      {/* Globe with responsive positioning - STATIC VERSION */}
+      <motion.div
+        className={`absolute inset-0 flex pointer-events-none ${isMobile ? 'items-center justify-center' : 'left-[475px] top-[400px] justify-center'}`}
         style={isMobile ? {top: '89%', left: '45%', transform: 'translate(-50%, -50%)'} : {}}
         initial={{ opacity: 0 }}
         animate={{ opacity: contentReady ? 0.75 : 0 }}
         transition={{ duration: 0.8 }}
       >
-         <Globe className={`${isMobile ? 'scale-[4.99]' : 'scale-[3]'}`} />
+        <div className={`${isMobile ? 'scale-[4.99]' : 'scale-[3]'} pointer-events-none`}>
+          <Globe 
+            className="pointer-events-none" 
+            // Add these props to disable interactions (adjust based on your Globe component's API)
+            interactive={false}
+            autoRotate={true}
+            rotateSpeed={0.5}
+            enableZoom={false}
+            enablePan={false}
+            enableRotate={false}
+          />
+        </div>
       </motion.div>
+
       {/* Content with creative reveal animations - adjusted for mobile/desktop */}
       <div className={`relative z-10 flex flex-col items-center justify-center h-full max-w-5xl mx-auto px-6 text-center ${isMobile ? '' : '-mt-20'}`}>
         {/* Logo instead of agency name */}
@@ -134,14 +145,13 @@ export default function Hero() {
           animate={{ opacity: contentReady ? 1 : 0, y: contentReady ? 0 : 15 }}
           transition={{ duration: 0.5 }}
         >
-            <Image
-    src="/revwhite.png"
-    alt="Revlient"
-    layout="fill"
-    objectFit="contain"
-    className="scale-[200%] sm:scale-150 md:scale-125" // Larger on mobile, progressively smaller on larger screens
-  />
-
+          <Image
+            src="/revwhite.png"
+            alt="Revlient"
+            layout="fill"
+            objectFit="contain"
+            className="scale-[200%] sm:scale-150 md:scale-125"
+          />
         </motion.div>
         
         {/* Elegant divider with creative animation */}
@@ -172,7 +182,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <motion.h1
-            className="text-4xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-9xl  text-white leading-tight tracking-tight"
+            className="text-4xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-9xl text-white leading-tight tracking-tight"
             initial={{ y: 50 }}
             animate={{ y: contentReady ? 0 : 50 }}
             transition={{ duration: 0.7, delay: 0.3 }}
@@ -183,7 +193,7 @@ export default function Hero() {
         
         {/* Subheading with fade-in plus slight blur animation */}
         <motion.p
-          className="text-lg md:text-4xl lg:text-3xl  text-red-600 font-semibold font-NeueMontreal  max-w-3xl"
+          className="text-lg md:text-4xl lg:text-3xl text-red-600 font-semibold font-NeueMontreal max-w-3xl"
           initial={{ opacity: 0, filter: "blur(10px)" }}
           animate={{
             opacity: contentReady ? 1 : 0,
